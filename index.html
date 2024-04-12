@@ -15,12 +15,22 @@
     <nav class="bg-gray-800 py-4 px-4">
       <div class="container mx-auto flex justify-between items-center">
         <h1 class="text-white text-xl font-bold">Do I need it?</h1>
-        <button
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          id="budgetingBtn"
-        >
-          Let's start budgeting
-        </button>
+        <div>
+          <button
+            id="addExpenseBtn"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+            onclick="openExpenseModal()"
+          >
+            Add Expense
+          </button>
+          <button
+            id="addCustomExpenseBtn"
+            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            onclick="openCustomExpenseModal()"
+          >
+            Add Custom Expense
+          </button>
+        </div>
       </div>
     </nav>
 
@@ -119,21 +129,7 @@
       </div>
     </div>
 
-    <!-- Button to Add Expenses -->
-    <button
-      id="addExpenseBtn"
-      class="fixed bottom-5 right-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      onclick="openExpenseModal()"
-    >
-      Add Expense
-    </button>
-    <button
-      id="addCustomExpenseBtn"
-      class="fixed bottom-20 right-5 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-      onclick="openCustomExpenseModal()"
-    >
-      Add Custom Expense
-    </button>
+
 
     <!-- Title above the Kanban Board -->
     <div class="text-center py-4">
