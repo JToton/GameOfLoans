@@ -1,9 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body></body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Budget Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100">
+
+<!-- Modals for Income and Expenses -->
+<div id="incomeModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center hidden">
+    <div class="bg-white p-5 rounded-lg">
+        <h2 class="text-lg">Enter your monthly income after taxes:</h2>
+        <input type="number" id="incomeInput" class="border p-2">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="saveIncome()">Submit</button>
+    </div>
+</div>
+
+<div id="expenseModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center hidden">
+    <div class="bg-white p-5 rounded-lg">
+        <h2 class="text-lg">Enter your expense:</h2>
+        <label for="expenseName">Expense Name:</label>
+        <select id="expenseName" class="border p-2">
+            <option value="Rent">Rent</option>
+            <option value="Utilities">Utilities</option>
+            <option value="Groceries">Groceries</option>
+            <option value="Transportation">Transportation</option>
+            <option value="Entertainment">Entertainment</option>
+        </select>
+        <label for="expenseAmount">Amount ($):</label>
+        <input type="number" id="expenseAmount" placeholder="Amount" class="border p-2">
+        <label for="expenseCategory">Category:</label>
+        <select id="expenseCategory" class="border p-2">
+            <option value="essential">Essential</option>
+            <option value="maybe">Maybe</option>
+            <option value="gonzo">Gonzo</option>
+        </select>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="addExpense()">Add Expense</button>
+        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded float-right" onclick="closeExpenseModal()">Done</button>
+    </div>
+</div>
+
+<div id="customExpenseModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center hidden">
+    <div class="bg-white p-5 rounded-lg">
+        <h2 class="text-lg">Enter your custom expense:</h2>
+        <label for="customExpenseName">Expense Name:</label>
+        <input type="text" id="customExpenseName" class="border p-2">
+        <label for="customExpenseAmount">Amount ($):</label>
+        <input type="number" id="customExpenseAmount" placeholder="Amount" class="border p-2">
+        <label for="customExpenseCategory">Category:</label>
+        <select id="customExpenseCategory" class="border p-2">
+            <option value="essential">Essential</option>
+            <option value="maybe">Maybe</option>
+            <option value="gonzo">Gonzo</option>
+        </select>
+        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onclick="addCustomExpense()">Add Custom Expense</button>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded float-right" onclick="closeCustomExpenseModal()">Done</button>
+    </div>
+</div>
+
+<!-- Button to Add Expenses -->
+<button id="addExpenseBtn" class="fixed bottom-5 right-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="openExpenseModal()">Add Expense</button>
+<button id="addCustomExpenseBtn" class="fixed bottom-20 right-5 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="openCustomExpenseModal()">Add Custom Expense</button>
+
+<!-- Title above the Kanban Board -->
+<div class="text-center py-4">
+    <h1 class="text-3xl font-bold text-gray-800">Budget Board</h1>
+</div>
+
+<!-- Main Layout for Money Meter, Kanban Board, and Graphs -->
+<div class="flex items-start">
+    <!-- Money Meter and Status Text -->
+    <div class="flex flex-col items-center mr-4">
+        <div class="text-center bg-white px-2 py-1">Surplus: $0 / Debt: $0</div>
+        <div class="w-10 h-64 bg-gray-300 relative">
+            <div id="moneyMeter" class="bg-green-500 w-full absolute bottom-0" style="height: 0%;"></div>
+            <div id="debtMeter" class="bg-red-500 w-full absolute top-0" style="height: 0%;"></div>
+        </div>
+    </div>
+
+    <!-- Kanban Board -->
+    <div class="flex-grow flex flex-col pr-5">
+        <div class="grid grid-cols-3 gap-4">
+            <div id="essential" class="category-section bg-red-100 p-5" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <h2 class="font-bold">Essential</h2>
+            </div>
+            <div id="maybe" class="category-section bg-yellow-100 p-5" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <h2 class="font-bold">Maybe</h2>
+            </div>
+            <div id="gonzo" class="category-section bg-green-100 p-5" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <h2 class="font-bold">Gonzo</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Graphs Section -->
+    <div class="w-1/4">
+        <canvas id="sp500Graph" class="p-2 bg-white rounded shadow mb-5"></canvas>
+        <canvas id="nasdaqGraph" class="p-2 bg-white rounded shadow mb-5"></canvas>
+        <canvas id="aaplGraph" class="p-2 bg-white rounded shadow mb-5"></canvas>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
 </html>
