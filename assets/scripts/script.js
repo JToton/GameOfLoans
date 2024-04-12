@@ -4,9 +4,9 @@ let expenseId = 0; // Unique identifier for each expense card
 let totalIncome = 0;
 let totalExpenses = 0;
 
-window.onload = function() {
-    document.getElementById('incomeModal').classList.remove('hidden');
-};
+function openIncomeModal() {
+  document.getElementById('incomeModal').classList.remove('hidden');
+}
 
 function saveIncome() {
     const income = parseFloat(document.getElementById('incomeInput').value);
