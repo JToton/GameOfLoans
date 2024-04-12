@@ -1,0 +1,6 @@
+/* Remove the default margin and padding */
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
