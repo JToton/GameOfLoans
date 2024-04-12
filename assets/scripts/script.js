@@ -72,40 +72,45 @@ function drag(event) {
 }
 
 function drop(event) {
-    event.preventDefault();
-    var data = event.dataTransfer.getData("text/plain");
-    var card = document.getElementById(data);
-    var dropZone = event.target.closest('.category-section'); // Ensure it's dropping into a category section
+  event.preventDefault();
+  var data = event.dataTransfer.getData("text/plain");
+  var card = document.getElementById(data);
+  var dropZone = event.target.closest('.category-section'); // Ensure it's dropping into a category section
 
-    if (!dropZone) {
-        console.error("Not a valid drop zone");
-        return; // Stop the function if not dropped into a category section
-    }
+  if (!dropZone) {
+      console.error("Not a valid drop zone");
+      return; // Stop the function if not dropped into a category section
+  }
 
-    var newCategory = dropZone.id;
-    var oldCategory = card.getAttribute('data-category');
-    var amount = parseFloat(card.getAttribute('data-amount'));
+  var newCategory = dropZone.id;
+  var oldCategory = card.getAttribute('data-category');
+  var amount = parseFloat(card.getAttribute('data-amount'));
 
-    card.setAttribute('data-category', newCategory); // Update the card's category
-    dropZone.appendChild(card); // Move the card to the new section
+  card.setAttribute('data-category', newCategory); // Update the card's category
+  dropZone.appendChild(card); // Move the card to the new section
 
-    updateFinancials(oldCategory, newCategory, amount);
+  updateFinancials(oldCategory, newCategory, amount);
 }
 
 function updateFinancials(oldCategory, newCategory, amount) {
-    if (isNaN(amount)) {
-        console.error("Invalid amount:", amount);
-        return; // Prevent processing if the amount is not a valid number
-    }
+  if (isNaN(amount)) {
+      console.error("Invalid amount:", amount);
+      return; // Prevent processing if the amount is not a valid number
+  }
 
-    if (oldCategory !== 'gonzo' && newCategory === 'gonzo') {
-        totalExpenses -= amount;
-    } else if (oldCategory === 'gonzo' && newCategory !== 'gonzo') {
-        totalExpenses += amount;
-    }
+  // Adjust financial calculations based on category changes
+  if (oldCategory !== 'gonzo' && newCategory === 'gonzo') {
+      // Moving to 'Gonzo', subtract the amount from total expenses
+      totalExpenses -= amount;
+  } else if (oldCategory === 'gonzo' && newCategory !== 'gonzo') {
+      // Moving out of 'Gonzo', add the amount back to total expenses
+      totalExpenses += amount;
+  }
 
-    updateMoneyMeter(); // Always update the money meter after financial changes
+  // Always update the money meter after financial changes
+  updateMoneyMeter(); 
 }
+
 
 function updateMoneyMeter() {
     const surplus = totalIncome - totalExpenses;
