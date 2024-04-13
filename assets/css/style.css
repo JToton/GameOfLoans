@@ -1,6 +1,13 @@
 /* Remove the default margin and padding */
-body,
-html {
-  margin: 0;
-  padding: 0;
+html, body {
+  height: 100%;   /* Make html and body take up the full height of the viewport */
+  width: 100%;    /* Make html and body take up the full width of the viewport */
+  margin: 0;      /* Remove default margin */
+  padding: 0;     /* Remove default padding */
+}
+
+body {
+  display: flex;        /* Set flexbox layout */
+  flex-direction: column; /* Stack children vertically */
+  min-height: 100vh;    /* Minimum height is full viewport height */
 }

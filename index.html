@@ -17,7 +17,7 @@
         <h1 class="text-white text-xl font-bold">Do I need it?</h1>
         <div>
           <button
-             id="addIncomeBtn"
+            id="addIncomeBtn"
             class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
             onclick="openIncomeModal()"
             > 
@@ -50,6 +50,7 @@
         <h2 class="text-lg">Enter your monthly income after taxes:</h2>
         <input type="number" id="incomeInput" class="border p-2" />
         <button
+          id="incomeSubmit"
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           onclick="saveIncome()"
         >
@@ -164,7 +165,7 @@
       <!--hello-->
 
       <!-- Kanban Board -->
-      <section class="flex-grow flex flex-col pr-5">
+      <section id = "draggable-lanes" class="flex-grow flex flex-col pr-5">
         <div class="grid grid-cols-3 gap-4">
           <!-- Container essential -->
           <div
@@ -191,6 +192,12 @@
           >
             <h2 class="font-bold">Gonzo</h2>
           </div>
+        </div>
+        <!-- Button Container -->
+        <div class="button-container mt-4 flex justify-center">
+          <button id="calculateSadHappyMoney" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Show Me The MONEY!
+          </button>
         </div>
       </section>
 
@@ -219,5 +226,6 @@
     </footer>
 
     <script src="assets/scripts/script.js"></script>
+    <script src="assets/scripts/youtube-api.js"></script>
   </body>
 </html>
