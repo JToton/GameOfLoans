@@ -227,20 +227,24 @@ async function getRandomspendingChannel() {
   displayVideoModal(videoData);
 }
 
-function getInvestingChannel() {
+async function getInvestingChannel() {
   console.log("Firing getInvestingChannel because the mood is positive.");
   // Implement the logic for happy money
   const randomIndex = Math.floor(Math.random() * investingChannels.length);
   const randomChannelId = investingChannels[randomIndex].id;
   fetchRandomVideoFromChannel(youTubeApiKey, randomChannelId);
+  const videoData = await fetchRandomVideoFromChannel(youTubeApiKey, randomChannelId);
+  displayVideoModal(videoData);
 }
 
-function getSavingsChannel() {
+async function getSavingsChannel() {
   console.log("Firing getSavingsChannel because the mood is negative.");
   // Implement the logic for sad money
   const randomIndex = Math.floor(Math.random() * savingsChannels.length);
   const randomChannelId = savingsChannels[randomIndex].id;
   fetchRandomVideoFromChannel(youTubeApiKey, randomChannelId);
+  const videoData = await fetchRandomVideoFromChannel(youTubeApiKey, randomChannelId);
+  displayVideoModal(videoData);
 }
 
 document.getElementById("incomeSubmit").addEventListener("click", function () {
