@@ -1,7 +1,25 @@
+/* Remove the default margin and padding */
+html,
 body {
-  display: flex;        /* Set flexbox layout */
+  height: 100%; /* Make html and body take up the full height of the viewport */
+  width: 100%; /* Make html and body take up the full width of the viewport */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
+body {
+  display: flex; /* Set flexbox layout */
   flex-direction: column; /* Stack children vertically */
-  min-height: 100vh;    /* Minimum height is full viewport height */
+  min-height: 100vh; /* Minimum height is full viewport height */
 }
 
 .cursor-se-resize {
@@ -9,5 +27,5 @@ body {
 }
 
 #modalContent {
-  overflow: auto; 
+  overflow: auto;
 }
