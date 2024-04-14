@@ -5,7 +5,7 @@ let totalIncome = 0;
 let totalExpenses = 0;
 
 function openIncomeModal() {
-  document.getElementById('incomeModal').classList.remove('hidden');
+  document.getElementById('incomeModal').classList.remove('hidden'); 
 }
 
 function saveIncome() {
@@ -46,6 +46,7 @@ function addExpense() {
 
 
 function createExpenseCard(name, amount, category) {
+    console.log(`Creating card for ${name}, Amount: ${amount}, Category: ${category}`);
     const card = document.createElement('div');
     card.innerHTML = `<strong>${name}</strong>: $${amount.toFixed(2)}`;
     card.draggable = true;
@@ -111,7 +112,7 @@ function updateFinancials(oldCategory, newCategory, amount) {
     updateMoneyMeter(); // Always update the money meter after financial changes
 }
 
-function updateMoneyMeter() {
+/*function updateMoneyMeter() {
   const surplus = totalIncome - totalExpenses;
   const moneyMeter = document.getElementById('moneyMeter');
   const debtMeter = document.getElementById('debtMeter');
@@ -123,7 +124,23 @@ function updateMoneyMeter() {
   debtMeter.style.backgroundColor = surplus < 0 ? 'red' : 'transparent';
   statusText.textContent = surplus >= 0 ? `Surplus: $${surplus.toFixed(2)} / Debt: $0.00` : `Surplus: $0.00 / Debt: $${(-surplus).toFixed(2)}`;
 }
+*/
 
+function updateMoneyMeter() {
+    const financialBalance = totalIncome - totalExpenses;
+    localStorage.setItem('financialStatus', financialBalance);  // Save financial balance to local storage so youtube-api.js can read from it
+  
+    const moneyMeter = document.getElementById('moneyMeter');
+    const debtMeter = document.getElementById('debtMeter');
+    const statusText = document.querySelector('.text-center.bg-white.px-2.py-1');
+  
+    moneyMeter.style.height = financialBalance >= 0 ? `${Math.min(financialBalance / totalIncome * 100, 100)}%` : '0%';
+    debtMeter.style.height = financialBalance < 0 ? `${Math.min(-financialBalance / totalIncome * 100, 100)}%` : '0%';
+    moneyMeter.style.backgroundColor = financialBalance >= 0 ? 'green' : 'transparent';
+    debtMeter.style.backgroundColor = financialBalance < 0 ? 'red' : 'transparent';
+    statusText.textContent = financialBalance >= 0 ? `Surplus: $${financialBalance.toFixed(2)} / Debt: $0.00` : `Surplus: $0.00 / Debt: $${(-financialBalance).toFixed(2)}`;
+  }
+  
 
 
 

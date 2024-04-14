@@ -1,13 +1,13 @@
-html,
 body {
-  height: 100%;
+  display: flex;        /* Set flexbox layout */
+  flex-direction: column; /* Stack children vertically */
+  min-height: 100vh;    /* Minimum height is full viewport height */
 }
 
-body {
-  display: flex;
-  min-height: 100vh;
+.cursor-se-resize {
+  cursor: se-resize;
 }
 
-.content {
-  flex: 1;
+#modalContent {
+  overflow: auto; 
 }

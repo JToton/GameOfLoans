@@ -50,6 +50,7 @@
         <h2 class="text-lg">Enter your monthly income after taxes:</h2>
         <input type="number" id="incomeInput" class="border p-2" />
         <button
+          id="incomeSubmit"
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           onclick="saveIncome()"
         >
@@ -160,10 +161,6 @@
         </div>
       </div>
 
-      <!-- Kanban Board -->
-      <section class="flex-1 flex flex-col pr-5">
-        <div class="grid grid-cols-3 gap-4 flex-1">
-          <!-- Container essential -->
           <div
             class="category-section bg-red-100 p-4 rounded shadow"
             id="essential"
@@ -188,6 +185,12 @@
           >
             <h2 class="font-bold">Gonzo</h2>
           </div>
+        </div>
+        <!-- Button Container -->
+        <div class="button-container mt-4 flex justify-center">
+          <button id="calculateSadHappyMoney" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Show Me The MONEY!
+          </button>
         </div>
       </section>
 
@@ -216,5 +219,6 @@
     </footer>
 
     <script src="assets/scripts/script.js"></script>
+    <script src="assets/scripts/youtube-api.js"></script>
   </body>
 </html>
