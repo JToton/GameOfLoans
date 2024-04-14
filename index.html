@@ -4,18 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kanban Budget Tracker</title>
+    <!-- Link to Tailwind CSS library -->
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <!-- Link to custom CSS file -->
     <link href="./assets/css/style.css" rel="stylesheet" />
+    <!-- Link to Chart.js library for graphs -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body class="bg-gray-100 flex flex-col min-h-screen">
+    <!-- Navigation bar -->
     <nav class="bg-gray-800 py-4 px-4">
       <div class="flex justify-between items-center">
         <h1 class="text-white text-xl font-bold">Braavosi Budgeting</h1>
         <div>
+          <!-- Button to open the income modal -->
           <button
             id="addIncomeBtn"
             class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
@@ -23,6 +28,7 @@
           >
             Add Income
           </button>
+          <!-- Button to open the expense modal -->
           <button
             id="addExpenseBtn"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
@@ -30,6 +36,7 @@
           >
             Add Expense
           </button>
+          <!-- Button to open the custom expense modal -->
           <button
             id="addCustomExpenseBtn"
             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
@@ -42,6 +49,7 @@
     </nav>
 
     <!-- Modals for Income and Expenses -->
+    <!-- Income Modal -->
     <div
       id="incomeModal"
       class="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center hidden"
@@ -59,6 +67,7 @@
       </div>
     </div>
 
+    <!-- Expense Modal -->
     <div
       id="expenseModal"
       class="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center hidden"
@@ -101,6 +110,7 @@
       </div>
     </div>
 
+    <!-- Custom Expense Modal -->
     <div
       id="customExpenseModal"
       class="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center hidden"
@@ -146,13 +156,17 @@
     <div class="flex flex-1 p-10 space-x-8">
       <!-- Money Meter and Status Text -->
       <div class="flex flex-col items-center">
+        <!-- Status text showing surplus/debt -->
         <div class="text-center bg-white px-2 py-1">Surplus: $0 / Debt: $0</div>
+        <!-- Money meter visual representation -->
         <div class="w-10 flex-1 bg-gray-300 relative">
+          <!-- Green portion of the money meter representing surplus -->
           <div
             id="moneyMeter"
             class="bg-green-500 w-full absolute bottom-0"
             style="height: 0%"
           ></div>
+          <!-- Red portion of the money meter representing debt -->
           <div
             id="debtMeter"
             class="bg-red-500 w-full absolute top-0"
@@ -163,8 +177,9 @@
 
       <!-- Kanban Board and Graphs -->
       <div class="flex-grow flex space-x-8">
+        <!-- Kanban Board -->
         <div class="flex-1 grid grid-cols-3 gap-8">
-          <!-- Container essential -->
+          <!-- Essential expenses category -->
           <div
             class="category-section bg-red-100 p-4 rounded shadow flex flex-col"
             id="essential"
@@ -174,6 +189,7 @@
             <h2 class="font-bold">Essential</h2>
             <div class="flex-grow"></div>
           </div>
+          <!-- Maybe expenses category -->
           <div
             id="maybe"
             class="category-section bg-yellow-100 p-4 rounded shadow flex flex-col"
@@ -183,6 +199,7 @@
             <h2 class="font-bold">Maybe</h2>
             <div class="flex-grow"></div>
           </div>
+          <!-- Gonzo expenses category -->
           <div
             id="gonzo"
             class="category-section bg-green-100 p-4 rounded shadow flex flex-col"
@@ -196,14 +213,17 @@
 
         <!-- Graphs Section -->
         <div class="w-1/4 flex flex-col space-y-8">
+          <!-- S&P 500 graph -->
           <canvas
             id="sp500Graph"
             class="p-2 bg-white rounded shadow flex-1"
           ></canvas>
+          <!-- NASDAQ graph -->
           <canvas
             id="nasdaqGraph"
             class="p-2 bg-white rounded shadow flex-1"
           ></canvas>
+          <!-- Apple stock graph -->
           <canvas
             id="aaplGraph"
             class="p-2 bg-white rounded shadow flex-1"
@@ -214,6 +234,7 @@
 
     <!-- Button Container -->
     <div class="button-container mt-4 flex justify-center">
+      <!-- Button to calculate sad/happy money and trigger YouTube functionality -->
       <button
         id="calculateSadHappyMoney"
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -222,6 +243,7 @@
       </button>
     </div>
 
+    <!-- Footer -->
     <footer class="bg-gray-800 py-4 px-4 mt-auto">
       <!--  footer content -->
       <div class="container mx-auto">
@@ -229,7 +251,9 @@
       </div>
     </footer>
 
+    <!-- Link to the main JavaScript file -->
     <script src="assets/scripts/script.js"></script>
+    <!-- Link to the YouTube API JavaScript file -->
     <script src="assets/scripts/youtube-api.js"></script>
   </body>
 </html>
