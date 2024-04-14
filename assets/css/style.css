@@ -11,3 +11,11 @@ body {
   flex-direction: column; /* Stack children vertically */
   min-height: 100vh;    /* Minimum height is full viewport height */
 }
+
+.cursor-se-resize {
+  cursor: se-resize;
+}
+
+#modalContent {
+  overflow: auto; 
+}
