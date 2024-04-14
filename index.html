@@ -11,16 +11,16 @@
     <link href="./assets/css/style.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
-  <body class="bg-gray-100 py-4 px-4">
+  <body class="bg-gray-100 flex-col">
     <nav class="bg-gray-800 py-4 px-4">
-      <div class="container mx-auto flex justify-between items-center">
-        <h1 class="text-white text-xl font-bold">Do I need it?</h1>
+      <div class="flex justify-between items-center">
+        <h1 class="text-white text-xl font-bold">Braavosi Budgeting</h1>
         <div>
           <button
             id="addIncomeBtn"
             class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
             onclick="openIncomeModal()"
-            > 
+          >
             Add Income
           </button>
           <button
@@ -137,19 +137,17 @@
       </div>
     </div>
 
-
-
     <!-- Title above the Kanban Board -->
     <div class="text-center py-4">
       <h1 class="text-3xl font-bold text-gray-800">Budget Board</h1>
     </div>
 
     <!-- Main Layout for Money Meter, Kanban Board, and Graphs -->
-    <div class="flex items-start">
+    <div class="flex flex-1 p-10">
       <!-- Money Meter and Status Text -->
       <div class="flex flex-col items-center mr-4">
         <div class="text-center bg-white px-2 py-1">Surplus: $0 / Debt: $0</div>
-        <div class="w-10 h-64 bg-gray-300 relative">
+        <div class="w-10 flex-1 bg-gray-300 relative">
           <div
             id="moneyMeter"
             class="bg-green-500 w-full absolute bottom-0"
@@ -162,14 +160,9 @@
           ></div>
         </div>
       </div>
-      <!--hello-->
 
-      <!-- Kanban Board -->
-      <section id = "draggable-lanes" class="flex-grow flex flex-col pr-5">
-        <div class="grid grid-cols-3 gap-4">
-          <!-- Container essential -->
           <div
-            class="category-section bg-red-100 p-4 rounded shadow h-full"
+            class="category-section bg-red-100 p-4 rounded shadow"
             id="essential"
             ondrop="drop(event)"
             ondragover="allowDrop(event)"
@@ -178,7 +171,7 @@
           </div>
           <div
             id="maybe"
-            class="category-section bg-yellow-100 p-4 rounded shadow h-full"
+            class="category-section bg-yellow-100 p-4 rounded shadow"
             ondrop="drop(event)"
             ondragover="allowDrop(event)"
           >
@@ -186,7 +179,7 @@
           </div>
           <div
             id="gonzo"
-            class="category-section bg-green-100 p-4 rounded shadow h-full"
+            class="category-section bg-green-100 p-4 rounded shadow"
             ondrop="drop(event)"
             ondragover="allowDrop(event)"
           >
@@ -202,26 +195,26 @@
       </section>
 
       <!-- Graphs Section -->
-      <div class="w-1/4">
+      <div class="w-1/4 flex flex-col">
         <canvas
           id="sp500Graph"
-          class="p-2 bg-white rounded shadow mb-5"
+          class="p-2 bg-white rounded shadow mb-5 flex-1"
         ></canvas>
         <canvas
           id="nasdaqGraph"
-          class="p-2 bg-white rounded shadow mb-5"
+          class="p-2 bg-white rounded shadow mb-5 flex-1"
         ></canvas>
         <canvas
           id="aaplGraph"
-          class="p-2 bg-white rounded shadow mb-5"
+          class="p-2 bg-white rounded shadow flex-1"
         ></canvas>
       </div>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-gray-800 py-4 px-4">
+      <!--  footer content -->
       <div class="container mx-auto">
-        <p class="text-white text-sm">&copy; 2023 IronCoin Bank</p>
+        <p class="text-white text-sm">&copy; 2023 Iron Bank of Bravvos</p>
       </div>
     </footer>
 

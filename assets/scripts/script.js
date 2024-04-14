@@ -64,6 +64,10 @@ function closeExpenseModal() {
     document.getElementById('expenseModal').classList.add('hidden');
 }
 
+function closeCustomExpenseModal() {
+  document.getElementById('customExpenseModal').classList.add('hidden');
+}
+
 function allowDrop(event) {
     event.preventDefault();  // This allows a drop by preventing the default handling of the element
 }
