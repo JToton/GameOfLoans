@@ -1,10 +1,12 @@
-/* Remove the default margin and padding */
+/* Remove the default margin and padding.
+   Html and body take up the full width & height of the viewport.
+      Remove default margin and padding.*/
 html,
 body {
-  height: 100%; /* Make html and body take up the full height of the viewport */
-  width: 100%; /* Make html and body take up the full width of the viewport */
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -16,10 +18,13 @@ body {
   flex: 1;
 }
 
+/* Set flexbox layout.
+        Stack children vertically.
+           Minimum height is full viewport height.*/
 body {
-  display: flex; /* Set flexbox layout */
-  flex-direction: column; /* Stack children vertically */
-  min-height: 100vh; /* Minimum height is full viewport height */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .cursor-se-resize {
