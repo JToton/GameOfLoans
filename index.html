@@ -4,39 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kanban Budget Tracker</title>
-    <!-- Link to Tailwind CSS library -->
+    <!-- *Link to Tailwind CSS library. -->
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <!-- Link to custom CSS file -->
+    <!-- *Link to custom CSS file. -->
     <link href="./assets/css/style.css" rel="stylesheet" />
-    <!-- Link to Chart.js library for graphs -->
+    <!-- *Link to Chart.js library for graphs. -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body class="bg-gray-100 flex flex-col min-h-screen">
-    <!-- Navigation bar -->
+    <!-- *Navigation bar. -->
     <nav class="bg-gray-800 py-4 px-4">
-      <div class="flex justify-between items-center">
-        <h1 class="text-white text-xl font-bold">Braavosi Budgeting</h1>
-        <div>
-          <!-- Button to open the income modal -->
+      <div class="flex flex-col lg:flex-row justify-between items-center">
+        <h1 class="text-white text-xl font-bold mb-4 lg:mb-0">
+          Braavosi Budgeting
+        </h1>
+        <div
+          class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-2"
+        >
+          <!-- *Button to open the income modal. -->
           <button
             id="addIncomeBtn"
-            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
             onclick="openIncomeModal()"
           >
             Add Income
           </button>
-          <!-- Button to open the expense modal -->
+          <!-- *Button to open the expense modal. -->
           <button
             id="addExpenseBtn"
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             onclick="openExpenseModal()"
           >
             Add Expense
           </button>
-          <!-- Button to open the custom expense modal -->
+          <!-- *Button to open the custom expense modal. -->
           <button
             id="addCustomExpenseBtn"
             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
@@ -48,18 +52,18 @@
       </div>
     </nav>
 
-    <!-- Modals for Income and Expenses -->
-    <!-- Income Modal -->
+    <!-- *Modals for Income and Expenses. -->
+    <!-- *Income Modal. -->
     <div
       id="incomeModal"
       class="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center hidden"
     >
-      <div class="bg-white p-5 rounded-lg">
+      <div class="bg-white p-5 rounded-lg w-full lg:w-1/2 xl:w-1/3">
         <h2 class="text-lg">Enter your monthly income after taxes:</h2>
-        <input type="number" id="incomeInput" class="border p-2" />
+        <input type="number" id="incomeInput" class="border p-2 w-full" />
         <button
           id="incomeSubmit"
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
           onclick="saveIncome()"
         >
           Submit
@@ -67,15 +71,15 @@
       </div>
     </div>
 
-    <!-- Expense Modal -->
+    <!-- *Expense Modal. -->
     <div
       id="expenseModal"
       class="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center hidden"
     >
-      <div class="bg-white p-5 rounded-lg">
+      <div class="bg-white p-5 rounded-lg w-full lg:w-1/2 xl:w-1/3">
         <h2 class="text-lg">Enter your expense:</h2>
         <label for="expenseName">Expense Name:</label>
-        <select id="expenseName" class="border p-2">
+        <select id="expenseName" class="border p-2 w-full">
           <option value="Rent">Rent</option>
           <option value="Utilities">Utilities</option>
           <option value="Groceries">Groceries</option>
@@ -87,22 +91,22 @@
           type="number"
           id="expenseAmount"
           placeholder="Amount"
-          class="border p-2"
+          class="border p-2 w-full"
         />
         <label for="expenseCategory">Category:</label>
-        <select id="expenseCategory" class="border p-2">
+        <select id="expenseCategory" class="border p-2 w-full">
           <option value="essential">Essential</option>
           <option value="maybe">Maybe</option>
           <option value="gonzo">Gonzo</option>
         </select>
         <button
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
           onclick="addExpense()"
         >
           Add Expense
         </button>
         <button
-          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded float-right"
+          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded float-right mt-4"
           onclick="closeExpenseModal()"
         >
           Done
@@ -110,36 +114,36 @@
       </div>
     </div>
 
-    <!-- Custom Expense Modal -->
+    <!-- *Custom Expense Modal. -->
     <div
       id="customExpenseModal"
       class="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center hidden"
     >
-      <div class="bg-white p-5 rounded-lg">
+      <div class="bg-white p-5 rounded-lg w-full lg:w-1/2 xl:w-1/3">
         <h2 class="text-lg">Enter your custom expense:</h2>
         <label for="customExpenseName">Expense Name:</label>
-        <input type="text" id="customExpenseName" class="border p-2" />
+        <input type="text" id="customExpenseName" class="border p-2 w-full" />
         <label for="customExpenseAmount">Amount ($):</label>
         <input
           type="number"
           id="customExpenseAmount"
           placeholder="Amount"
-          class="border p-2"
+          class="border p-2 w-full"
         />
         <label for="customExpenseCategory">Category:</label>
-        <select id="customExpenseCategory" class="border p-2">
+        <select id="customExpenseCategory" class="border p-2 w-full">
           <option value="essential">Essential</option>
           <option value="maybe">Maybe</option>
           <option value="gonzo">Gonzo</option>
         </select>
         <button
-          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4"
           onclick="addCustomExpense()"
         >
           Add Custom Expense
         </button>
         <button
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded float-right"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded float-right mt-4"
           onclick="closeCustomExpenseModal()"
         >
           Done
@@ -147,26 +151,28 @@
       </div>
     </div>
 
-    <!-- Title above the Kanban Board -->
+    <!-- *Title above the Kanban Board. -->
     <div class="text-center py-4">
       <h1 class="text-3xl font-bold text-gray-800">Budget Board</h1>
     </div>
 
-    <!-- Main Layout for Money Meter, Kanban Board, and Graphs -->
-    <div class="flex flex-1 p-10 space-x-8">
-      <!-- Money Meter and Status Text -->
-      <div class="flex flex-col items-center">
-        <!-- Status text showing surplus/debt -->
+    <!-- *Main Layout for Money Meter, Kanban Board, and Graphs. -->
+    <div
+      class="flex flex-col lg:flex-row p-4 lg:p-10 space-y-8 lg:space-y-0 lg:space-x-8"
+    >
+      <!-- *Money Meter and Status Text. -->
+      <div class="flex flex-col items-center lg:w-1/6">
+        <!-- *Status text showing surplus/debt. -->
         <div class="text-center bg-white px-2 py-1">Surplus: $0 / Debt: $0</div>
-        <!-- Money meter visual representation -->
+        <!-- *Money meter visual representation. -->
         <div class="w-10 flex-1 bg-gray-300 relative">
-          <!-- Green portion of the money meter representing surplus -->
+          <!-- *Green portion of the money meter representing surplus. -->
           <div
             id="moneyMeter"
             class="bg-green-500 w-full absolute bottom-0"
             style="height: 0%"
           ></div>
-          <!-- Red portion of the money meter representing debt -->
+          <!-- Red portion of the money meter representing debt. -->
           <div
             id="debtMeter"
             class="bg-red-500 w-full absolute top-0"
@@ -175,11 +181,13 @@
         </div>
       </div>
 
-      <!-- Kanban Board and Graphs -->
-      <div class="flex-grow flex space-x-8">
-        <!-- Kanban Board -->
-        <div class="flex-1 grid grid-cols-3 gap-8">
-          <!-- Essential expenses category -->
+      <!-- *Kanban Board and Graphs. -->
+      <div
+        class="flex-grow flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-8"
+      >
+        <!-- *Kanban Board. -->
+        <div class="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- *Essential expenses category. -->
           <div
             class="category-section bg-red-100 p-4 rounded shadow flex flex-col"
             id="essential"
@@ -189,7 +197,7 @@
             <h2 class="font-bold">Essential</h2>
             <div class="flex-grow"></div>
           </div>
-          <!-- Maybe expenses category -->
+          <!-- *Maybe expenses category. -->
           <div
             id="maybe"
             class="category-section bg-yellow-100 p-4 rounded shadow flex flex-col"
@@ -199,7 +207,7 @@
             <h2 class="font-bold">Maybe</h2>
             <div class="flex-grow"></div>
           </div>
-          <!-- Gonzo expenses category -->
+          <!-- *Gonzo expenses category. -->
           <div
             id="gonzo"
             class="category-section bg-green-100 p-4 rounded shadow flex flex-col"
@@ -211,19 +219,19 @@
           </div>
         </div>
 
-        <!-- Graphs Section -->
-        <div class="w-1/4 flex flex-col space-y-8">
-          <!-- S&P 500 graph -->
+        <!-- *Graphs Section. -->
+        <div class="w-full lg:w-1/4 flex flex-col space-y-8">
+          <!-- *S&P 500 graph. -->
           <canvas
             id="sp500Graph"
             class="p-2 bg-white rounded shadow flex-1"
           ></canvas>
-          <!-- NASDAQ graph -->
+          <!-- *NASDAQ graph. -->
           <canvas
             id="nasdaqGraph"
             class="p-2 bg-white rounded shadow flex-1"
           ></canvas>
-          <!-- Apple stock graph -->
+          <!-- *Apple stock graph. -->
           <canvas
             id="aaplGraph"
             class="p-2 bg-white rounded shadow flex-1"
@@ -232,9 +240,9 @@
       </div>
     </div>
 
-    <!-- Button Container -->
-    <div class="button-container mt-4 flex justify-center">
-      <!-- Button to calculate sad/happy money and trigger YouTube functionality -->
+    <!-- *Button Container. -->
+    <div class="button-container mt-4 py-4 px-4 flex justify-center">
+      <!-- *Button to calculate sad/happy money and trigger YouTube functionality. -->
       <button
         id="calculateSadHappyMoney"
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -243,17 +251,16 @@
       </button>
     </div>
 
-    <!-- Footer -->
+    <!-- *Footer. -->
     <footer class="bg-gray-800 py-4 px-4 mt-auto">
-      <!--  footer content -->
       <div class="container mx-auto">
         <p class="text-white text-sm">&copy; 2023 Iron Bank of Bravvos</p>
       </div>
     </footer>
 
-    <!-- Link to the main JavaScript file -->
+    <!-- *Link to the main JavaScript file. -->
     <script src="assets/scripts/script.js"></script>
-    <!-- Link to the YouTube API JavaScript file -->
+    <!-- *Link to the YouTube API JavaScript file. -->
     <script src="assets/scripts/youtube-api.js"></script>
   </body>
 </html>
