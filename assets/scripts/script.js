@@ -140,37 +140,29 @@ function updateMoneyMeter() {
   const moneyMeter = document.getElementById("moneyMeter");
   const debtMeter = document.getElementById("debtMeter");
   const statusText = document.getElementById("statusText");
-  const moneyMeterContainer = document.getElementById("moneyMeterContainer");
-  const debtLabel = document.getElementById("debtLabel");
+  const surplusPercentage = document.getElementById("surplusPercentage");
+  const debtPercentage = document.getElementById("debtPercentage");
 
-  const meterHeight = Math.abs(financialBalance / totalIncome) * 100;
+  const meterHeight = Math.abs(financialBalance / totalIncome) * 50;
 
   if (financialBalance >= 0) {
-    moneyMeter.style.height = `${Math.min(meterHeight, 100)}%`;
-    moneyMeter.style.top = `${50 - Math.min(meterHeight, 100)}%`;
+    moneyMeter.style.height = `${Math.min(meterHeight, 50)}%`;
+    moneyMeter.style.top = `${50 - Math.min(meterHeight, 50)}%`;
     debtMeter.style.height = "0%";
-    debtLabel.style.top = "50%";
+    surplusPercentage.textContent = `Surplus (${Math.round(meterHeight * 2)}%)`;
+    debtPercentage.textContent = "-100%";
   } else {
     moneyMeter.style.height = "0%";
-    debtMeter.style.height = `${meterHeight}%`;
+    debtMeter.style.height = `${Math.min(meterHeight, 50)}%`;
     debtMeter.style.top = "50%";
-    debtLabel.style.top = `${50 + meterHeight}%`;
-
-    if (meterHeight > 100) {
-      moneyMeterContainer.style.height = `${200 + (meterHeight - 100)}%`;
-    } else {
-      moneyMeterContainer.style.height = "";
-    }
+    surplusPercentage.textContent = "Surplus";
+    debtPercentage.textContent = `-${Math.round(meterHeight * 2)}%`;
   }
 
   statusText.textContent =
     financialBalance >= 0
       ? `Surplus: $${financialBalance.toFixed(2)} / Debt: $0.00`
       : `Surplus: $0.00 / Debt: $${Math.abs(financialBalance).toFixed(2)}`;
-}
-
-function openExpenseModal() {
-  document.getElementById("expenseModal").classList.remove("hidden");
 }
 
 // *Function to handle the opening of the custom expense modal.
