@@ -4,6 +4,10 @@ let expenseId = 0;
 let totalIncome = 0;
 let totalExpenses = 0;
 
+// *Nav Dropdown Toggle
+const menuToggle = document.getElementById("menuToggle");
+const menu = document.getElementById("menu");
+
 function openIncomeModal() {
   document.getElementById("incomeModal").classList.remove("hidden");
 }
@@ -274,3 +278,7 @@ function plotData(data, canvasId) {
     },
   });
 }
+// *Toggle event listener for nav dropdown.
+menuToggle.addEventListener("click", () => {
+  menu.classList.toggle("hidden");
+});
