@@ -1,0 +1,60 @@
+function createExpenseCard(name, amount, category) {
+<<<<<<< aaron
+    console.log(`Creating card for ${name}, Amount: ${amount}, Category: ${category}`);
+    const card = document.createElement('div');
+    card.id = 'expense-' + expenseId++;
+    card.innerHTML = `<strong>${name}</strong>: $${amount.toFixed(2)}
+                      <button class="delete-btn bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" onclick="deleteExpenseCard(event, '${card.id}')">Delete</button>`;
+    card.draggable = true;
+    card.ondragstart = drag;
+    card.classList.add('bg-white', 'p-2', 'mb-2', 'rounded', 'shadow', 'cursor-move');
+    card.setAttribute('data-category', category);
+    card.setAttribute('data-amount', amount);
+    document.getElementById(category).appendChild(card);
+}
+
+function deleteExpenseCard(event, cardId) {
+    console.log("Attempting to delete card with ID:", cardId);
+    const card = document.getElementById(cardId);
+    if (!card) {
+        alert("Error: Card not found!");
+        return;
+    }
+
+    const amount = parseFloat(card.getAttribute('data-amount'));
+    const category = card.getAttribute('data-category');
+
+    if (category !== 'gonzo') {
+        totalExpenses -= amount;
+    }
+
+    card.remove();
+    updateMoneyMeter();
+    event.stopPropagation();
+}
+
+
+
+=======
+  console.log(
+    `Creating card for ${name}, Amount: ${amount}, Category: ${category}`
+  );
+  const card = document.createElement("div");
+  card.innerHTML = `<strong>${name}</strong>: $${amount.toFixed(2)}`;
+  card.draggable = true;
+  card.id = "expense-" + expenseId++;
+  card.ondragstart = drag;
+  card.classList.add(
+    "bg-white",
+    "p-2",
+    "mb-2",
+    "rounded",
+    "shadow",
+    "cursor-move"
+  );
+  card.setAttribute("data-category", category);
+  card.setAttribute("data-amount", amount);
+  document.getElementById(category).appendChild(card);
+}
+
+>>>>>>> main
