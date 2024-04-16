@@ -139,11 +139,25 @@ function updateMoneyMeter() {
     moneyMeter.style.top = `${50 - Math.min(meterHeight, 100)}%`;
     debtMeter.style.height = "0%";
     debtLabel.style.top = "50%";
+    // Ensure the bottom is rounded when the meter is small
+    if (meterHeight < 50) {
+      moneyMeter.classList.add("rounded-3xl");
+    } else {
+      moneyMeter.classList.remove("rounded-3xl");
+      moneyMeter.classList.add("rounded-t-3xl");
+    }
   } else {
     moneyMeter.style.height = "0%";
     debtMeter.style.height = `${meterHeight}%`;
     debtMeter.style.top = "50%";
     debtLabel.style.top = `${50 + meterHeight}%`;
+
+    if (meterHeight > 50) {
+      debtMeter.classList.add("rounded-3xl");
+    } else {
+      debtMeter.classList.remove("rounded-3xl");
+      debtMeter.classList.add("rounded-b-3xl");
+    }
 
     if (meterHeight > 100) {
       moneyMeterContainer.style.height = `${200 + (meterHeight - 100)}%`;
@@ -156,6 +170,7 @@ function updateMoneyMeter() {
     ? `Surplus: $${financialBalance.toFixed(2)} / Debt: $0.00`
     : `Surplus: $0.00 / Debt: $${Math.abs(financialBalance).toFixed(2)}`;
 }
+
 
 function openExpenseModal() {
   document.getElementById("expenseModal").classList.remove("hidden");
