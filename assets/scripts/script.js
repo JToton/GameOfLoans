@@ -49,10 +49,12 @@ function createExpenseCard(name, amount, category) {
   );
   const card = document.createElement("div");
   card.id = "expense-" + expenseId++;
-  card.innerHTML = `<strong>${name}</strong>: $${amount.toFixed(2)}
-  <button class="delete-btn bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" onclick="deleteExpenseCard(event, '${
-    card.id
-  }')">Delete</button>`;
+  card.innerHTML = `
+  <div class="flex justify-between items-center p-2 bg-white rounded data-category="${category}" data-amount="${amount}">
+    <strong>${name}</strong>: $${amount.toFixed(2)}
+    <button class="delete-btn bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" onclick="deleteExpenseCard(event, '${card.id}')">Delete</button>
+  </div>
+`;
   card.draggable = true;
   card.ondragstart = drag;
   card.classList.add(
