@@ -188,43 +188,22 @@
       <div
         class="flex flex-col lg:flex-row p-4 lg:p-10 space-y-8 lg:space-y-0 lg:space-x-8"
       >
-        <!-- Money Meter and Status Text -->
+        
+       <!-- Money Meter and Status Text -->
         <div class="flex flex-col items-center w-full lg:w-1/6">
-          <div
-            id="moneyMeterContainer"
-            class="relative w-20 h-64 sm:h-80 lg:h-auto lg:flex-1 bg-gray-300 rounded-3xl shadow-inner overflow-visible"
-          >
-            <div
-              class="absolute inset-0 flex flex-col justify-between items-center px-2 py-4"
-            >
-              <span class="text-xs">Surplus</span>
+          <div id="moneyMeterContainer" class="relative w-20 h-64 sm:h-80 lg:h-auto lg:flex-1 bg-gray-300 rounded-3xl shadow-inner">
+            <div class="absolute inset-0 flex flex-col justify-between items-center px-2 py-4 z-10">
+              <span id="surplusPercentage" class="text-xs">Surplus</span>
               <span class="text-xs">100%</span>
               <span class="text-xs">50%</span>
               <span class="text-xs">0%</span>
               <span class="text-xs">-50%</span>
-              <span class="text-xs">-100%</span>
+              <span id="debtPercentage" class="text-xs">-100%</span>
             </div>
-            <div
-              id="moneyMeter"
-              class="absolute bottom-1/2 w-full rounded-3xl transition-all duration-500 ease-in-out"
-              style="
-                height: 0%;
-                background: linear-gradient(to top, #4ade80, #22c55e);
-              "
-            ></div>
-            <div
-              id="debtMeter"
-              class="absolute top-1/2 w-full rounded-3xl transition-all duration-500 ease-in-out"
-              style="
-                height: 0%;
-                background: linear-gradient(to bottom, #f87171, #dc2626);
-              "
-            ></div>
+            <div id="moneyMeter" class="absolute bottom-1/2 w-full rounded-3xl transition-all duration-500 ease-in-out z-0" style="height: 0%; background: linear-gradient(to top, #4ade80, #22c55e);"></div>
+            <div id="debtMeter" class="absolute top-1/2 w-full rounded-3xl transition-all duration-500 ease-in-out z-0" style="height: 0%; background: linear-gradient(to bottom, #f87171, #dc2626);"></div>
           </div>
-          <div
-            id="statusText"
-            class="text-center bg-white px-2 py-1 rounded-b-lg shadow-md"
-          >
+          <div id="statusText" class="text-center bg-white px-2 py-1 rounded-b-lg shadow-md">
             Surplus: $0 / Debt: $0
           </div>
         </div>
