@@ -54,8 +54,10 @@ function createExpenseCard(name, amount, category) {
   const card = document.createElement("div");
   card.id = "expense-" + expenseId++;
   card.innerHTML = `
-  <div class="flex justify-between items-center p-2 bg-white rounded data-category="${category}" data-amount="${amount}">
-    <strong>${name}</strong>: $${amount.toFixed(2)}
+  <div class="flex justify-between items-center p-2 bg-white rounded" data-category="${category}" data-amount="${amount}">
+    <div class="flex-grow"> <!-- This div will wrap the name and amount and make them grow to use available space -->
+      <strong>${name}</strong>: $${amount.toFixed(2)}
+    </div>
     <button class="delete-btn bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" onclick="deleteExpenseCard(event, '${card.id}')">Delete</button>
   </div>
 `;
