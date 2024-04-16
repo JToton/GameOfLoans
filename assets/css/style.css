@@ -19,8 +19,8 @@
       }
       
       /* Set flexbox layout.
-                    Stack children vertically.
-                       Minimum height is full viewport height.*/
+              Stack children vertically.
+                 Minimum height is full viewport height.*/
       body {
         display: flex;
         flex-direction: column;
@@ -34,7 +34,13 @@
       #modalContent {
         overflow: auto;
       }
-      
-      
+
+      /* Hide money meter on screens smaller than 640px */
+@media (max-width: 640px) {
+  #moneyMeterContainer {
+      display: none;
+  }
+}
+
     
     
