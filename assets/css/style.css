@@ -7,6 +7,7 @@
         width: 100%;
         margin: 0;
         padding: 0;
+
       }
       
       body {
@@ -42,5 +43,17 @@
   }
 }
 
+.category-section {
+  background-color: #f0f0f0; /* Light grey background */
+  border: 1px solid #d1d1d1; /* Slightly darker border */
+  box-shadow: inset 0 4px 6px rgba(0,0,0,0.1); /* Inner shadow for depth */
+  padding: 10px;
+  border-radius: 8px; /* Rounded corners */
+  transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.category-section:hover {
+  box-shadow: inset 0 6px 8px rgba(0,0,0,0.2); /* Deeper shadow on hover */
+}
     
     
