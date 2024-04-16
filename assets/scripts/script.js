@@ -48,9 +48,12 @@ function createExpenseCard(name, amount, category) {
     `Creating card for ${name}, Amount: ${amount}, Category: ${category}`
   );
   const card = document.createElement("div");
-  card.innerHTML = `<strong>${name}</strong>: $${amount.toFixed(2)}`;
-  card.draggable = true;
   card.id = "expense-" + expenseId++;
+  card.innerHTML = `<strong>${name}</strong>: $${amount.toFixed(2)}
+                      <button class="delete-btn bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" onclick="deleteExpenseCard(event, '${
+                        card.id
+                      }')">Delete</button>`;
+  card.draggable = true;
   card.ondragstart = drag;
   card.classList.add(
     "bg-white",
@@ -152,9 +155,10 @@ function updateMoneyMeter() {
     }
   }
 
-  statusText.textContent = financialBalance >= 0
-    ? `Surplus: $${financialBalance.toFixed(2)} / Debt: $0.00`
-    : `Surplus: $0.00 / Debt: $${Math.abs(financialBalance).toFixed(2)}`;
+  statusText.textContent =
+    financialBalance >= 0
+      ? `Surplus: $${financialBalance.toFixed(2)} / Debt: $0.00`
+      : `Surplus: $0.00 / Debt: $${Math.abs(financialBalance).toFixed(2)}`;
 }
 
 function openExpenseModal() {
@@ -195,6 +199,26 @@ function addCustomExpense() {
       "Please fill in all fields with valid entries for the custom expense."
     );
   }
+}
+
+function deleteExpenseCard(event, cardId) {
+  console.log("Attempting to delete card with ID:", cardId);
+  const card = document.getElementById(cardId);
+  if (!card) {
+    alert("Error: Card not found!");
+    return;
+  }
+
+  const amount = parseFloat(card.getAttribute("data-amount"));
+  const category = card.getAttribute("data-category");
+
+  if (category !== "gonzo") {
+    totalExpenses -= amount;
+  }
+
+  card.remove();
+  updateMoneyMeter();
+  event.stopPropagation();
 }
 
 // *S&P 500 ETF, NASDAQ ETF & Apple.
