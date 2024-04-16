@@ -34,3 +34,13 @@
       #modalContent {
         overflow: auto;
       }
+
+      /* Hide money meter on screens smaller than 640px */
+@media (max-width: 640px) {
+  #moneyMeterContainer {
+      display: none;
+  }
+}
+
+    
+    
