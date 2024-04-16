@@ -143,20 +143,20 @@ function updateMoneyMeter() {
   const surplusPercentage = document.getElementById("surplusPercentage");
   const debtPercentage = document.getElementById("debtPercentage");
 
-  const meterHeight = Math.abs(financialBalance / totalIncome) * 100;
+  const meterHeight = Math.abs(financialBalance / totalIncome) * 50;
 
   if (financialBalance >= 0) {
-    moneyMeter.style.height = `${Math.min(meterHeight, 100)}%`;
+    moneyMeter.style.height = `${Math.min(meterHeight, 50)}%`;
     moneyMeter.style.top = `${50 - Math.min(meterHeight, 50)}%`;
     debtMeter.style.height = "0%";
-    surplusPercentage.textContent = `Surplus (${Math.round(meterHeight)}%)`;
+    surplusPercentage.textContent = `Surplus (${Math.round(meterHeight * 2)}%)`;
     debtPercentage.textContent = "-100%";
   } else {
     moneyMeter.style.height = "0%";
-    debtMeter.style.height = `${Math.min(meterHeight, 100)}%`;
-    debtMeter.style.top = `${50 - Math.min(meterHeight, 50)}%`;
+    debtMeter.style.height = `${Math.min(meterHeight, 50)}%`;
+    debtMeter.style.top = "50%";
     surplusPercentage.textContent = "Surplus";
-    debtPercentage.textContent = `-${Math.round(meterHeight)}%`;
+    debtPercentage.textContent = `-${Math.round(meterHeight * 2)}%`;
   }
 
   statusText.textContent =
