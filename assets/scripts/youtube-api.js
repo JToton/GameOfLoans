@@ -157,13 +157,13 @@ function createVideoModal() {
   const modalOverlay = document.createElement("div");
   modalOverlay.id = "videoModal";
   modalOverlay.className =
-    "fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden";
+    "fixed z-50 inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden";
 
   // Modal content box
   const modalContent = document.createElement("div");
   modalContent.id = "modalContent";
   modalContent.className =
-    "fixed z-50 left-1/2 top-10 p-5 border-10 border-black rounded-xl w-1/3 transform -translate-x-1/2 shadow-xl rounded-md bg-white hidden sm:w-1/3 md:w-1/4 lg:w-1/5";
+    "fixed  left-1/2 top-10 p-5 border-10 border-black rounded-xl w-1/3 transform -translate-x-1/2 shadow-xl rounded-md bg-white hidden sm:w-1/3 md:w-1/4 lg:w-1/5";
 
   // Close button
   const closeButton = document.createElement("button");
