@@ -126,29 +126,35 @@ function updateFinancials(oldCategory, newCategory, amount) {
 
 function updateMoneyMeter() {
   const financialBalance = totalIncome - totalExpenses;
-  // *Save financial balance to local storage so youtube-api.js can read from it.
-  localStorage.setItem("financialStatus", financialBalance);
-
   const moneyMeter = document.getElementById("moneyMeter");
   const debtMeter = document.getElementById("debtMeter");
-  const statusText = document.querySelector(".text-center.bg-white.px-2.py-1");
+  const statusText = document.getElementById("statusText");
+  const moneyMeterContainer = document.getElementById("moneyMeterContainer");
+  const debtLabel = document.getElementById("debtLabel");
 
-  moneyMeter.style.height =
-    financialBalance >= 0
-      ? `${Math.min((financialBalance / totalIncome) * 100, 100)}%`
-      : "0%";
-  debtMeter.style.height =
-    financialBalance < 0
-      ? `${Math.min((-financialBalance / totalIncome) * 100, 100)}%`
-      : "0%";
-  moneyMeter.style.backgroundColor =
-    financialBalance >= 0 ? "green" : "transparent";
-  debtMeter.style.backgroundColor =
-    financialBalance < 0 ? "red" : "transparent";
-  statusText.textContent =
-    financialBalance >= 0
-      ? `Surplus: $${financialBalance.toFixed(2)} / Debt: $0.00`
-      : `Surplus: $0.00 / Debt: $${(-financialBalance).toFixed(2)}`;
+  const meterHeight = Math.abs(financialBalance / totalIncome) * 100;
+
+  if (financialBalance >= 0) {
+    moneyMeter.style.height = `${Math.min(meterHeight, 100)}%`;
+    moneyMeter.style.top = `${50 - Math.min(meterHeight, 100)}%`;
+    debtMeter.style.height = "0%";
+    debtLabel.style.top = "50%";
+  } else {
+    moneyMeter.style.height = "0%";
+    debtMeter.style.height = `${meterHeight}%`;
+    debtMeter.style.top = "50%";
+    debtLabel.style.top = `${50 + meterHeight}%`;
+
+    if (meterHeight > 100) {
+      moneyMeterContainer.style.height = `${200 + (meterHeight - 100)}%`;
+    } else {
+      moneyMeterContainer.style.height = "";
+    }
+  }
+
+  statusText.textContent = financialBalance >= 0
+    ? `Surplus: $${financialBalance.toFixed(2)} / Debt: $0.00`
+    : `Surplus: $0.00 / Debt: $${Math.abs(financialBalance).toFixed(2)}`;
 }
 
 function openExpenseModal() {

@@ -160,27 +160,32 @@
     <div
       class="flex flex-col lg:flex-row p-4 lg:p-10 space-y-8 lg:space-y-0 lg:space-x-8"
     >
-      <!-- *Money Meter and Status Text. -->
-      <div class="flex flex-col items-center lg:w-1/6">
-        <!-- *Status text showing surplus/debt. -->
-        <div class="text-center bg-white px-2 py-1">Surplus: $0 / Debt: $0</div>
-        <!-- *Money meter visual representation. -->
-        <div class="w-10 flex-1 bg-gray-300 relative">
-          <!-- *Green portion of the money meter representing surplus. -->
-          <div
-            id="moneyMeter"
-            class="bg-green-500 w-full absolute bottom-0"
-            style="height: 0%"
-          ></div>
-          <!-- Red portion of the money meter representing debt. -->
-          <div
-            id="debtMeter"
-            class="bg-red-500 w-full absolute top-0"
-            style="height: 0%"
-          ></div>
-        </div>
-      </div>
-
+     <!-- Money Meter and Status Text -->
+<div class="flex flex-col items-center w-full lg:w-1/6">
+  <!-- Money meter visual representation -->
+  <div id="moneyMeterContainer" class="relative w-20 h-64 sm:h-80 lg:h-auto lg:flex-1 bg-gray-300 rounded-b-3xl shadow-inner overflow-visible">
+    <!-- Scale lines and labels -->
+    <div class="absolute inset-0 flex flex-col justify-between items-center px-2 py-4">
+      <span class="text-xs">Surplus</span>
+      <span class="text-xs">100%</span>
+      <span class="text-xs">50%</span>
+      <span class="text-xs">0%</span>
+      <span class="text-xs">-50%</span>
+      <span class="text-xs">-100%</span>
+    </div>
+    <!-- Green portion of the money meter representing surplus -->
+   <div id="moneyMeter" class="absolute bottom-1/2 w-full rounded-t-xl transition-all duration-500 ease-in-out" style="height: 0%; background: linear-gradient(to top, #4ade80, #22c55e);"></div>
+    <!-- Red portion of the money meter representing debt -->
+    <div id="debtMeter" class="absolute top-1/2 w-full rounded-b-3xl transition-all duration-500 ease-in-out" style="height: 0%; background: linear-gradient(to bottom, #f87171, #dc2626);"></div>
+    <!-- Labels for Surplus and Debt -->
+    <div class="absolute inset-0 flex flex-col justify-between items-center pointer-events-none">
+      <span class="text-white text-xs font-bold bg-green-500 px-2 py-1 rounded-full">Surplus</span>
+      <span id="debtLabel" class="text-white text-xs font-bold bg-red-500 px-2 py-1 rounded-full">Debt</span>
+    </div>
+  </div>
+  <!-- Status text showing surplus/debt -->
+  <div id="statusText" class="text-center bg-white px-2 py-1 rounded-b-lg shadow-md">Surplus: $0 / Debt: $0</div>
+</div>
       <!-- *Kanban Board and Graphs. -->
       <div
         class="flex-grow flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-8"
