@@ -43,27 +43,6 @@ function addExpense() {
   }
 }
 
-function createExpenseCard(name, amount, category) {
-  console.log(
-    `Creating card for ${name}, Amount: ${amount}, Category: ${category}`
-  );
-  const card = document.createElement("div");
-  card.innerHTML = `<strong>${name}</strong>: $${amount.toFixed(2)}`;
-  card.draggable = true;
-  card.id = "expense-" + expenseId++;
-  card.ondragstart = drag;
-  card.classList.add(
-    "bg-white",
-    "p-2",
-    "mb-2",
-    "rounded",
-    "shadow",
-    "cursor-move"
-  );
-  card.setAttribute("data-category", category);
-  card.setAttribute("data-amount", amount);
-  document.getElementById(category).appendChild(card);
-}
 
 function closeExpenseModal() {
   document.getElementById("expenseModal").classList.add("hidden");
