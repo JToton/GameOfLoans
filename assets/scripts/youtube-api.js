@@ -130,7 +130,7 @@ async function fetchRandomVideoFromChannel(youTubeApiKey, randomChannelId) {
     }
     const data = await response.json();
     if (!data.items || data.items.length === 0) {
-      console.log('No videos found.');
+      console.log("No videos found.");
       return null; // No videos to return
     }
 
@@ -157,18 +157,19 @@ function createVideoModal() {
   const modalOverlay = document.createElement("div");
   modalOverlay.id = "videoModal";
   modalOverlay.className =
-      "fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden";
-  
+    "fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden";
+
   // Modal content box
   const modalContent = document.createElement("div");
   modalContent.id = "modalContent";
   modalContent.className =
-  "fixed left-1/2 top-10 p-5 border-10 border-black rounded-xl w-1/3 transform -translate-x-1/2 shadow-xl rounded-md bg-white hidden sm:w-1/3 md:w-1/4 lg:w-1/5";
+    "fixed left-1/2 top-10 p-5 border-10 border-black rounded-xl w-1/3 transform -translate-x-1/2 shadow-xl rounded-md bg-white hidden sm:w-1/3 md:w-1/4 lg:w-1/5";
 
   // Close button
   const closeButton = document.createElement("button");
   closeButton.textContent = "×";
-  closeButton.className = "absolute top-2 right-2 text-2xl text-gray-600 hover:text-gray-900";
+  closeButton.className =
+    "absolute top-2 right-2 text-2xl text-gray-600 hover:text-gray-900";
   closeButton.onclick = closeModal;
 
   // Title
@@ -184,12 +185,13 @@ function createVideoModal() {
   videoFrame.setAttribute("frameBorder", "0");
   videoFrame.allowFullscreen = true;
   videoFrame.allow =
-      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+    "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
 
   // Dropdown button for video description
   const descriptionToggle = document.createElement("button");
   descriptionToggle.textContent = "Show Description";
-  descriptionToggle.className = "mt-3 px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400 cursor-pointer";
+  descriptionToggle.className =
+    "mt-3 px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400 cursor-pointer";
 
   // Description
   const videoDescription = document.createElement("p");
@@ -199,17 +201,19 @@ function createVideoModal() {
   // Notes textarea
   const notesTextarea = document.createElement("textarea");
   notesTextarea.id = "videoNotes";
-  notesTextarea.className = "mt-4 p-2 border border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-md shadow-sm w-full";
+  notesTextarea.className =
+    "mt-4 p-2 border border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-md shadow-sm w-full";
   notesTextarea.placeholder = "Write your notes here...";
   notesTextarea.rows = "4";
 
   // Save notes button (optional)
   const saveNotesButton = document.createElement("button");
   saveNotesButton.textContent = "Save Notes";
-  saveNotesButton.className = "mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 cursor-pointer";
+  saveNotesButton.className =
+    "mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 cursor-pointer";
   saveNotesButton.onclick = () => {
-      const notes = document.getElementById("videoNotes").value;
-      console.log("Notes saved: ", notes);
+    const notes = document.getElementById("videoNotes").value;
+    console.log("Notes saved: ", notes);
   };
 
   const resizeHandle = document.createElement("div");
@@ -228,34 +232,35 @@ function createVideoModal() {
   document.body.appendChild(modalOverlay);
   modalContent.appendChild(resizeHandle);
 
-  descriptionToggle.addEventListener('click', function() {
-    if (videoDescription.classList.contains('hidden')) {
-      videoDescription.classList.remove('hidden');
+  descriptionToggle.addEventListener("click", function () {
+    if (videoDescription.classList.contains("hidden")) {
+      videoDescription.classList.remove("hidden");
       descriptionToggle.textContent = "Hide Description";
     } else {
-      videoDescription.classList.add('hidden');
+      videoDescription.classList.add("hidden");
       descriptionToggle.textContent = "Show Description";
     }
   });
 
-  resizeHandle.addEventListener('mousedown', function(e) {
+  resizeHandle.addEventListener("mousedown", function (e) {
     e.preventDefault();
-    window.addEventListener('mousemove', resize);
-    window.addEventListener('mouseup', stopResize);
+    window.addEventListener("mousemove", resize);
+    window.addEventListener("mouseup", stopResize);
   });
 }
 
-
 function resize(e) {
-  const modalContent = document.getElementById('modalContent');
-  modalContent.style.width = e.clientX - modalContent.getBoundingClientRect().left + 'px';
-  modalContent.style.height = e.clientY - modalContent.getBoundingClientRect().top + 'px';
+  const modalContent = document.getElementById("modalContent");
+  modalContent.style.width =
+    e.clientX - modalContent.getBoundingClientRect().left + "px";
+  modalContent.style.height =
+    e.clientY - modalContent.getBoundingClientRect().top + "px";
 }
 
 // Define stopResize function
 function stopResize() {
-  window.removeEventListener('mousemove', resize);
-  window.removeEventListener('mouseup', stopResize);
+  window.removeEventListener("mousemove", resize);
+  window.removeEventListener("mouseup", stopResize);
 }
 
 function closeModal() {
@@ -281,7 +286,10 @@ async function getRandomspendingChannel() {
   // Implement the logic for high income
   const randomIndex = Math.floor(Math.random() * spendingChannels.length);
   const randomChannelId = spendingChannels[randomIndex].id;
-  const videoData = await fetchRandomVideoFromChannel(youTubeApiKey, randomChannelId);
+  const videoData = await fetchRandomVideoFromChannel(
+    youTubeApiKey,
+    randomChannelId
+  );
   displayVideoModal(videoData);
 }
 
@@ -291,7 +299,10 @@ async function getInvestingChannel() {
   const randomIndex = Math.floor(Math.random() * investingChannels.length);
   const randomChannelId = investingChannels[randomIndex].id;
   fetchRandomVideoFromChannel(youTubeApiKey, randomChannelId);
-  const videoData = await fetchRandomVideoFromChannel(youTubeApiKey, randomChannelId);
+  const videoData = await fetchRandomVideoFromChannel(
+    youTubeApiKey,
+    randomChannelId
+  );
   displayVideoModal(videoData);
 }
 
@@ -301,27 +312,35 @@ async function getSavingsChannel() {
   const randomIndex = Math.floor(Math.random() * savingsChannels.length);
   const randomChannelId = savingsChannels[randomIndex].id;
   fetchRandomVideoFromChannel(youTubeApiKey, randomChannelId);
-  const videoData = await fetchRandomVideoFromChannel(youTubeApiKey, randomChannelId);
+  const videoData = await fetchRandomVideoFromChannel(
+    youTubeApiKey,
+    randomChannelId
+  );
   displayVideoModal(videoData);
 }
 
 document.getElementById("incomeSubmit").addEventListener("click", function () {
   const income = parseInt(document.getElementById("incomeInput").value, 10);
-  if (income > 200000) {
+  if (income > 10000) {
     getRandomspendingChannel();
   }
 });
 
-document.getElementById("calculateSadHappyMoney").addEventListener("click", function () {
-  console.log("Button clicked");
-  const storedFinancialStatus = parseInt(localStorage.getItem('financialStatus'), 10);
-  console.log(storedFinancialStatus);  // Retrieve the stored financial status
-  if (storedFinancialStatus > 0) {
-    getInvestingChannel();
-  } else if (storedFinancialStatus <= 0) {
-    getSavingsChannel();
-  }
-});
+document
+  .getElementById("calculateSadHappyMoney")
+  .addEventListener("click", function () {
+    console.log("Button clicked");
+    const storedFinancialStatus = parseInt(
+      localStorage.getItem("financialStatus"),
+      10
+    );
+    console.log(storedFinancialStatus); // Retrieve the stored financial status
+    if (storedFinancialStatus > 0) {
+      getInvestingChannel();
+    } else if (storedFinancialStatus <= 0) {
+      getSavingsChannel();
+    }
+  });
 
 document.addEventListener("DOMContentLoaded", () => {
   createVideoModal();
