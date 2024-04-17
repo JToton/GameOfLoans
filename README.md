@@ -6,7 +6,7 @@
 
 ## Link to Deployed Application.
 
-• [https://jtoton.github.io/Workflow-Tracker/]
+• [https://jtoton.github.io/GameOfLoans/]
 
 ## Table of Contents:
 
