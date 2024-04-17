@@ -1,7 +1,7 @@
 // *API KEY Entry and fetch URL.
 const youTubeApiKey = "AIzaSyBVd9Fn_22Glar1jMSqBFTOv18yGy1ICkk";
 
-// this aaray holds all the info for the investings channels.
+// Array of investing channels
 const investingChannels = [
   {
     channelName: "GrahamStephan",
@@ -29,7 +29,7 @@ const investingChannels = [
   },
 ];
 
-// this aaray holds all the info for the savings channels.
+//Array of savings channels
 const savingsChannels = [
   {
     channelName: "thefinancialdiet",
@@ -65,7 +65,7 @@ const savingsChannels = [
   },
 ];
 
-// this aaray holds all the info for the secrect spending channels.
+//Array of spending channels
 const spendingChannels = [
   {
     channelName: "luxurytravelexpert",
@@ -101,7 +101,7 @@ const spendingChannels = [
   },
 ];
 
-// a function that isnt called in website, but can be uesd to add more channel id to the array above
+// Fetch channel ID from YouTube API
 async function fetchChannelId(apiKey, channelName) {
   const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
     channelName
@@ -122,7 +122,7 @@ async function fetchChannelId(apiKey, channelName) {
   }
 }
 
-// Grabs a random channel from the array above.
+// Fetch a random video from a channel
 async function fetchRandomVideoFromChannel(youTubeApiKey, randomChannelId) {
   const uploadsPlaylistId = `UU${randomChannelId.substring(2)}`;
   const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=25&key=${youTubeApiKey}`;
@@ -280,8 +280,7 @@ function closeModal() {
   document.getElementById("videoNotes").value = "";
 }
 
-// Create the modal content cont
-
+// Display video modal
 function displayVideoModal(video) {
   document.getElementById("videoTitle").textContent = video.title;
   document.getElementById("videoDescription").textContent = video.description;
@@ -292,7 +291,7 @@ function displayVideoModal(video) {
   document.getElementById("modalContent").classList.remove("hidden");
 }
 
-// this picks a random video from the returned spending channel array
+// Implement the logic for high income
 async function getRandomspendingChannel() {
   // Implement the logic for high income
   const randomIndex = Math.floor(Math.random() * spendingChannels.length);
@@ -304,7 +303,7 @@ async function getRandomspendingChannel() {
   displayVideoModal(videoData);
 }
 
-// this picks a random video from the returned investing channel array
+// Implement the logic for happy money
 async function getInvestingChannel() {
   // Implement the logic for happy money
   const randomIndex = Math.floor(Math.random() * investingChannels.length);
@@ -317,7 +316,7 @@ async function getInvestingChannel() {
   displayVideoModal(videoData);
 }
 
-// this picks a random video from the returned savings channel array
+// Implement the logic for sad money
 async function getSavingsChannel() {
   // Implement the logic for sad money
   const randomIndex = Math.floor(Math.random() * savingsChannels.length);
@@ -330,6 +329,7 @@ async function getSavingsChannel() {
   displayVideoModal(videoData);
 }
 
+// Event listeners
 document.getElementById("incomeSubmit").addEventListener("click", function () {
   const income = parseInt(document.getElementById("incomeInput").value, 10);
   if (income > 10000) {
@@ -337,6 +337,7 @@ document.getElementById("incomeSubmit").addEventListener("click", function () {
   }
 });
 
+// Event listener for the "Calculate" button
 document
   .getElementById("calculateSadHappyMoney")
   .addEventListener("click", function () {
