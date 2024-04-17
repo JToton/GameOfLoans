@@ -8,6 +8,9 @@ let totalExpenses = 0;
 const menuToggle = document.getElementById("menuToggle");
 const menu = document.getElementById("menu");
 
+// *Load data from local storage on page load
+document.addEventListener("DOMContentLoaded", loadExpenses);
+
 function openIncomeModal() {
   document.getElementById("incomeModal").classList.remove("hidden");
 }
@@ -42,6 +45,8 @@ function addExpense() {
     }
     // *Recalculate and update the money meter.
     updateMoneyMeter();
+    // *Save expenses to local storage
+    saveExpenses();
   } else {
     alert("Please fill in all fields with valid entries.");
   }
@@ -58,7 +63,9 @@ function createExpenseCard(name, amount, category) {
     <div class="flex-grow"> <!-- This div will wrap the name and amount and make them grow to use available space -->
       <strong>${name}</strong>: $${amount.toFixed(2)}
     </div>
-    <button class="delete-btn bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" onclick="deleteExpenseCard(event, '${card.id}')">Delete</button>
+    <button class="delete-btn bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" onclick="deleteExpenseCard(event, '${
+      card.id
+    }')">Delete</button>
   </div>
 `;
   card.draggable = true;
@@ -116,6 +123,8 @@ function drop(event) {
   dropZone.appendChild(card);
 
   updateFinancials(oldCategory, newCategory, amount);
+  // *Save expenses to local storage
+  saveExpenses();
 }
 
 function updateFinancials(oldCategory, newCategory, amount) {
@@ -194,6 +203,8 @@ function addCustomExpense() {
     // *Optionally close the modal.
     updateMoneyMeter();
     closeCustomExpenseModal();
+    // *Save expenses to local storage
+    saveExpenses();
   } else {
     alert(
       "Please fill in all fields with valid entries for the custom expense."
@@ -218,6 +229,8 @@ function deleteExpenseCard(event, cardId) {
 
   card.remove();
   updateMoneyMeter();
+  // *Save expenses to local storage
+  saveExpenses();
   event.stopPropagation();
 }
 
@@ -274,6 +287,38 @@ function plotData(data, canvasId) {
     },
   });
 }
+
+// *Save expenses to local storage
+function saveExpenses() {
+  const expenses = [];
+  const expenseCards = document.querySelectorAll("[id^='expense-']");
+  expenseCards.forEach((card) => {
+    const name = card.querySelector("strong").textContent;
+    const amount = parseFloat(card.getAttribute("data-amount"));
+    const category = card.getAttribute("data-category");
+    expenses.push({ name, amount, category });
+  });
+  localStorage.setItem("expenses", JSON.stringify(expenses));
+}
+
+// *Load data from local storage
+function loadExpenses() {
+  const income = localStorage.getItem("income");
+  if (income) {
+    totalIncome = parseFloat(income);
+  }
+
+  const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+  expenses.forEach((expense) => {
+    createExpenseCard(expense.name, expense.amount, expense.category);
+    if (expense.category !== "gonzo") {
+      totalExpenses += expense.amount;
+    }
+  });
+
+  updateMoneyMeter();
+}
+
 // *Toggle event listener for nav dropdown.
 menuToggle.addEventListener("click", () => {
   menu.classList.toggle("hidden");
