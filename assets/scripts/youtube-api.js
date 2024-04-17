@@ -1,6 +1,7 @@
 // *API KEY Entry and fetch URL.
 const youTubeApiKey = "AIzaSyBVd9Fn_22Glar1jMSqBFTOv18yGy1ICkk";
 
+// this aaray holds all the info for the investings channels.
 const investingChannels = [
   {
     channelName: "GrahamStephan",
@@ -28,6 +29,7 @@ const investingChannels = [
   },
 ];
 
+// this aaray holds all the info for the savings channels.
 const savingsChannels = [
   {
     channelName: "thefinancialdiet",
@@ -63,6 +65,7 @@ const savingsChannels = [
   },
 ];
 
+// this aaray holds all the info for the secrect spending channels.
 const spendingChannels = [
   {
     channelName: "luxurytravelexpert",
@@ -98,6 +101,7 @@ const spendingChannels = [
   },
 ];
 
+// a function that isnt called in website, but can be uesd to add more channel id to the array above
 async function fetchChannelId(apiKey, channelName) {
   const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
     channelName
@@ -106,7 +110,7 @@ async function fetchChannelId(apiKey, channelName) {
     const response = await fetch(url);
     const data = await response.json();
     if (data.items.length > 0) {
-      console.log("Fetched Channel ID: ", data.items[0].id.channelId);
+
       return data.items[0].id.channelId;
     } else {
       console.error("No channel found with that name.");
@@ -118,11 +122,10 @@ async function fetchChannelId(apiKey, channelName) {
   }
 }
 
+// Grabs a random channel from the array above.
 async function fetchRandomVideoFromChannel(youTubeApiKey, randomChannelId) {
   const uploadsPlaylistId = `UU${randomChannelId.substring(2)}`;
-  console.log(uploadsPlaylistId);
   const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=25&key=${youTubeApiKey}`;
-  console.log(url);
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -130,7 +133,7 @@ async function fetchRandomVideoFromChannel(youTubeApiKey, randomChannelId) {
     }
     const data = await response.json();
     if (!data.items || data.items.length === 0) {
-      console.log("No videos found.");
+
       return null; // No videos to return
     }
 
@@ -144,7 +147,6 @@ async function fetchRandomVideoFromChannel(youTubeApiKey, randomChannelId) {
       publishedAt: randomVideo.snippet.publishedAt,
       videoUrl: `https://www.youtube.com/watch?v=${randomVideo.snippet.resourceId.videoId}`,
     };
-    console.log(videoDetails);
     return videoDetails;
   } catch (error) {
     console.error(`Error fetching videos: ${error}`);
@@ -152,6 +154,7 @@ async function fetchRandomVideoFromChannel(youTubeApiKey, randomChannelId) {
   }
 }
 
+// this function builds the YouTube modal.
 function createVideoModal() {
   // Modal overlay
   const modalOverlay = document.createElement("div");
@@ -203,18 +206,25 @@ function createVideoModal() {
   notesTextarea.id = "videoNotes";
   notesTextarea.className =
     "mt-4 p-2 border border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-md shadow-sm w-full";
-  notesTextarea.placeholder = "Write your notes here...";
+  notesTextarea.placeholder = "Take your notes here and copy them for future use... ";
   notesTextarea.rows = "4";
 
-  // Save notes button (optional)
-  const saveNotesButton = document.createElement("button");
-  saveNotesButton.textContent = "Save Notes";
-  saveNotesButton.className =
+  // Save notes to clipboard button
+  const saveNotesToClipboard = document.createElement("button");
+  saveNotesToClipboard.textContent = "Save Notes to Clipboard";
+  saveNotesToClipboard.className =
     "mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 cursor-pointer";
-  saveNotesButton.onclick = () => {
+  saveNotesToClipboard.onclick = () => {
     const notes = document.getElementById("videoNotes").value;
-    console.log("Notes saved: ", notes);
-  };
+    navigator.clipboard.writeText(notes)
+    .then(() => {
+        alert('Notes copied to clipboard');
+    })
+    .catch(err => {
+        console.error('Failed to copy notes: ', err);
+        alert('Failed to copy notes');
+    });
+};
 
   const resizeHandle = document.createElement("div");
   resizeHandle.className = "absolute bottom-0 right-0 cursor-se-resize p-2";
@@ -227,7 +237,7 @@ function createVideoModal() {
   modalContent.appendChild(descriptionToggle);
   modalContent.appendChild(videoDescription);
   modalContent.appendChild(notesTextarea);
-  modalContent.appendChild(saveNotesButton);
+  modalContent.appendChild(saveNotesToClipboard);
   modalOverlay.appendChild(modalContent);
   document.body.appendChild(modalOverlay);
   modalContent.appendChild(resizeHandle);
@@ -241,7 +251,7 @@ function createVideoModal() {
       descriptionToggle.textContent = "Show Description";
     }
   });
-
+// this is the event lisnter to the rezise button
   resizeHandle.addEventListener("mousedown", function (e) {
     e.preventDefault();
     window.addEventListener("mousemove", resize);
@@ -267,6 +277,7 @@ function closeModal() {
   document.getElementById("videoModal").classList.add("hidden");
   document.getElementById("modalContent").classList.add("hidden");
   document.getElementById("videoFrame").src = "";
+  document.getElementById("videoNotes").value = "";
 }
 
 // Create the modal content cont
@@ -281,8 +292,8 @@ function displayVideoModal(video) {
   document.getElementById("modalContent").classList.remove("hidden");
 }
 
+// this picks a random video from the returned spending channel array
 async function getRandomspendingChannel() {
-  console.log("Firing getRandomspendingChannel because income is high.");
   // Implement the logic for high income
   const randomIndex = Math.floor(Math.random() * spendingChannels.length);
   const randomChannelId = spendingChannels[randomIndex].id;
@@ -293,8 +304,8 @@ async function getRandomspendingChannel() {
   displayVideoModal(videoData);
 }
 
+// this picks a random video from the returned investing channel array
 async function getInvestingChannel() {
-  console.log("Firing getInvestingChannel because the mood is positive.");
   // Implement the logic for happy money
   const randomIndex = Math.floor(Math.random() * investingChannels.length);
   const randomChannelId = investingChannels[randomIndex].id;
@@ -306,8 +317,8 @@ async function getInvestingChannel() {
   displayVideoModal(videoData);
 }
 
+// this picks a random video from the returned savings channel array
 async function getSavingsChannel() {
-  console.log("Firing getSavingsChannel because the mood is negative.");
   // Implement the logic for sad money
   const randomIndex = Math.floor(Math.random() * savingsChannels.length);
   const randomChannelId = savingsChannels[randomIndex].id;
@@ -329,12 +340,11 @@ document.getElementById("incomeSubmit").addEventListener("click", function () {
 document
   .getElementById("calculateSadHappyMoney")
   .addEventListener("click", function () {
-    console.log("Button clicked");
     const storedFinancialStatus = parseInt(
       localStorage.getItem("financialStatus"),
       10
     );
-    console.log(storedFinancialStatus); // Retrieve the stored financial status
+     // Retrieve the stored financial status
     if (storedFinancialStatus > 0) {
       getInvestingChannel();
     } else if (storedFinancialStatus <= 0) {
