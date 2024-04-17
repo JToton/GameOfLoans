@@ -1,6 +1,7 @@
 // *API KEY Entry and fetch URL.
 const youTubeApiKey = "AIzaSyBVd9Fn_22Glar1jMSqBFTOv18yGy1ICkk";
 
+// Array of investing channels
 const investingChannels = [
   {
     channelName: "GrahamStephan",
@@ -28,6 +29,7 @@ const investingChannels = [
   },
 ];
 
+//Array of savings channels
 const savingsChannels = [
   {
     channelName: "thefinancialdiet",
@@ -63,6 +65,7 @@ const savingsChannels = [
   },
 ];
 
+//Array of spending channels
 const spendingChannels = [
   {
     channelName: "luxurytravelexpert",
@@ -98,6 +101,7 @@ const spendingChannels = [
   },
 ];
 
+// Fetch channel ID from YouTube API
 async function fetchChannelId(apiKey, channelName) {
   const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
     channelName
@@ -118,6 +122,7 @@ async function fetchChannelId(apiKey, channelName) {
   }
 }
 
+// Fetch a random video from a channel
 async function fetchRandomVideoFromChannel(youTubeApiKey, randomChannelId) {
   const uploadsPlaylistId = `UU${randomChannelId.substring(2)}`;
   console.log(uploadsPlaylistId);
@@ -269,8 +274,7 @@ function closeModal() {
   document.getElementById("videoFrame").src = "";
 }
 
-// Create the modal content cont
-
+// Display video modal
 function displayVideoModal(video) {
   document.getElementById("videoTitle").textContent = video.title;
   document.getElementById("videoDescription").textContent = video.description;
@@ -281,6 +285,7 @@ function displayVideoModal(video) {
   document.getElementById("modalContent").classList.remove("hidden");
 }
 
+// Implement the logic for high income
 async function getRandomspendingChannel() {
   console.log("Firing getRandomspendingChannel because income is high.");
   // Implement the logic for high income
@@ -293,6 +298,7 @@ async function getRandomspendingChannel() {
   displayVideoModal(videoData);
 }
 
+// Implement the logic for happy money
 async function getInvestingChannel() {
   console.log("Firing getInvestingChannel because the mood is positive.");
   // Implement the logic for happy money
@@ -306,6 +312,7 @@ async function getInvestingChannel() {
   displayVideoModal(videoData);
 }
 
+// Implement the logic for sad money
 async function getSavingsChannel() {
   console.log("Firing getSavingsChannel because the mood is negative.");
   // Implement the logic for sad money
@@ -319,6 +326,7 @@ async function getSavingsChannel() {
   displayVideoModal(videoData);
 }
 
+// Event listeners
 document.getElementById("incomeSubmit").addEventListener("click", function () {
   const income = parseInt(document.getElementById("incomeInput").value, 10);
   if (income > 10000) {
@@ -326,6 +334,7 @@ document.getElementById("incomeSubmit").addEventListener("click", function () {
   }
 });
 
+// Event listener for the "Calculate" button
 document
   .getElementById("calculateSadHappyMoney")
   .addEventListener("click", function () {
