@@ -1,16 +1,11 @@
-/* Remove the default margin and padding.
-   Html and body take up the full width & height of the viewport.
-      Remove default margin and padding.*/
 html,
 body {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
-}
-
-body {
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
 }
 
@@ -18,26 +13,17 @@ body {
   flex: 1;
 }
 
-/* Set flexbox layout.
-        Stack children vertically.
-            Minimum height is full viewport height.*/
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-/*Allows the Youtube modal to resize*/
+/* Allows the Youtube modal to resize */
 .cursor-se-resize {
   cursor: se-resize;
 }
 
-/*Keeps all the content in the modal*/
+/* Keeps all the content in the modal */
 #modalContent {
   overflow: auto;
 }
 
-/*Custom Swim Lane Colors and formatting*/
+/* Custom Swim Lane Colors and formatting */
 #essential {
   background-color: #d1fae5;
   border: 1px solid #a7f3d0;
