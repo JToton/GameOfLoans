@@ -155,6 +155,8 @@ out the design.
 
 • Polygon.io - Stock market API. (2024, March 20). https://polygon.io/
 
+• API Reference | YouTube Data API | Google for Developers. (n.d.). Google for Developers. https://developers.google.com/youtube/v3/docs
+
 • All other links, sources and information gained and used within the project were found or otherwise located within the above sources(sublinks within the above links). The
 classwork, modules, TA's, as well as the instructor provided a multitude of links within the assignment itself as well as within class demonstrations and our communication
 through slack and or discord.
