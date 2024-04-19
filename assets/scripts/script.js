@@ -23,6 +23,7 @@ function saveIncome() {
     document.getElementById("incomeModal").classList.add("hidden");
     // *Open the expense modal.
     openExpenseModal();
+    updateFinancialStatus();
   } else {
     alert("Please enter a valid income amount.");
   }
@@ -45,8 +46,9 @@ function addExpense() {
     }
     // *Recalculate and update the money meter.
     updateMoneyMeter();
-    // *Save expenses to local storage
+    // *Save expenses to local storage.
     saveExpenses();
+    updateFinancialStatus();
   } else {
     alert("Please fill in all fields with valid entries.");
   }
@@ -203,8 +205,9 @@ function addCustomExpense() {
     // *Optionally close the modal.
     updateMoneyMeter();
     closeCustomExpenseModal();
-    // *Save expenses to local storage
+    // *Save expenses to local storage.
     saveExpenses();
+    updateFinancialStatus();
   } else {
     alert(
       "Please fill in all fields with valid entries for the custom expense."
@@ -229,7 +232,7 @@ function deleteExpenseCard(event, cardId) {
 
   card.remove();
   updateMoneyMeter();
-  // *Save expenses to local storage
+  // *Save expenses to local storage.
   saveExpenses();
   event.stopPropagation();
 }
@@ -288,29 +291,35 @@ function plotData(data, canvasId) {
   });
 }
 
-// *Save expenses to local storage
+// *Save expenses to local storage.
 function saveExpenses() {
+  // *Create array.
   const expenses = [];
   const expenseCards = document.querySelectorAll("[id^='expense-']");
+  // *Iterate through array.
   expenseCards.forEach((card) => {
     const name = card.querySelector("strong").textContent;
     const amount = parseFloat(card.getAttribute("data-amount"));
     const category = card.getAttribute("data-category");
+    // *Push to array
     expenses.push({ name, amount, category });
   });
+  // *Stringify to store in local.
   localStorage.setItem("expenses", JSON.stringify(expenses));
 }
 
-// *Load data from local storage
+// *Load data from local storage.
 function loadExpenses() {
   const income = localStorage.getItem("income");
   if (income) {
     totalIncome = parseFloat(income);
   }
-
+  // *Parse / Grab from array for each array element.
   const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
   expenses.forEach((expense) => {
+    // *Grab object and inner data.
     createExpenseCard(expense.name, expense.amount, expense.category);
+    // *Re-calc.
     if (expense.category !== "gonzo") {
       totalExpenses += expense.amount;
     }
@@ -318,6 +327,39 @@ function loadExpenses() {
 
   updateMoneyMeter();
 }
+
+// *Functions to Update Financial Status.
+function updateFinancialStatus() {
+  const financialStatus = totalIncome - totalExpenses;
+  localStorage.setItem("financialStatus", financialStatus);
+}
+
+// *Function to Calculate total Expenses.
+function calculateTotalExpenses() {
+  const expenses = document.querySelectorAll(".expense");
+  let total = 0;
+  expenses.forEach((expense) => {
+    const amountText = expense.textContent.match(/\$(\d+(\.\d{1,2})?)/)[1];
+    const amount = parseFloat(amountText);
+    total += amount;
+  });
+  return total;
+}
+
+// *Event listener for the "Show Me The Money" button.
+document
+  .getElementById("calculateSadHappyMoney")
+  .addEventListener("click", function () {
+    const financialStatus = parseInt(
+      localStorage.getItem("financialStatus"),
+      10
+    );
+    if (financialStatus > 0) {
+      getInvestingChannel();
+    } else {
+      getSavingsChannel();
+    }
+  });
 
 // *Toggle event listener for nav dropdown.
 menuToggle.addEventListener("click", () => {
